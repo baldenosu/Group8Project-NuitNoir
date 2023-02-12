@@ -1,0 +1,66 @@
+<!-- employees.hbs -->
+<h1>Employees</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> ]
+</body>
+<div id="browse" style="display: block">
+    <p>
+        <strong>Browse Employees</strong>
+    </p>
+    <table border="1" cellpadding="5">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Title</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Dominic Chavez</td>
+                <td>Manager</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>James Balden</td>
+                <td>Manager</td>
+            </tr>
+             <tr>
+                <td>3</td>
+                <td>Cole Phelps</td>
+                <td>Clerk</td>
+            </tr>           
+        </tbody>
+    </table> 
+</div>
+<p>&nbsp;</p>   
+<div id="insert" style="display: block">
+    <form id="addEmployee">
+        <legend>
+            <strong>Add Employee</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Name</label>
+            <input type="text" name="name">
+            <label>Title</label>
+            <input type="text" name="title">  
+        </fieldset>
+        <input class="btn" type="submit" id="addEmployee" value="Add Employee">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>
+<p>&nbsp;</p> 
+<div id="update" style="display: block">
+    <form id="updateEmployee">
+        <legend>
+            <strong>Update Employee</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Name</label>
+            <input type="text" name="name">
+            <label>Title</label>
+            <input type="text" name="title">
+        </fieldset>
+        <input class="btn" type="submit" id="updateEmployee" value="Update Employee">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>

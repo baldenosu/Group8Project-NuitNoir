@@ -1,0 +1,87 @@
+<!-- customers.hbs -->
+<h1>Customers</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> ]
+</body>
+<div id="browse" style="display: block">
+    <p>
+        <strong>Browse Customers</strong>
+    </p>
+    <table border="1" cellpadding="5">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Customer Level</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Wyatt Earp</td>
+                <td>326 Allen Street, Tombstone, AZ 85638</td>
+                <td>helliscomingwithme@gmail.com</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Virgil Earp</td>
+                <td>408 AZ-80, Tombstone, AZ 85638</td>
+                <td>holdonnothin@gmail.com</td>
+                <td>2</td>
+            </tr>
+             <tr>
+                <td>3</td>
+                <td>Morgan Earp</td>
+                <td>417 E Allen St, Tombstone, AZ 85638</td>
+                <td>hiya@gmail.com</td>
+                <td>3</td>
+            </tr>           
+        </tbody>
+    </table> 
+</div>
+<p>&nbsp;</p>   
+<div id="insert" style="display: block">
+    <form id="addCustomer">
+        <legend>
+            <strong>Add Customer</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Name</label>
+            <input type="text" name="name">
+            <label>Address</label>
+            <input type="text" name="address">
+            <label>Email</label>
+            <input type="email" name="email">
+            <label>Customer Level</label>
+            <input type="number" name="customerLevel">    
+        </fieldset>
+        <input class="btn" type="submit" id="addCustomer" value="Add Customer">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>
+<p>&nbsp;</p> 
+<div id="update" style="display: block">
+    <form id="updateCustomer">
+        <legend>
+            <strong>Update Customer</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Name</label>
+            <input type="text" name="name">
+            <label>Address</label>
+            <input type="text" name="address">
+            <label>Email</label>
+            <input type="email" name="email">
+            <label>Customer Level</label>
+            <select name="customerLevel">
+                <option value="0">&nbsp;</option>
+                <option value="1">Platinum</option>
+                <option value="2">Gold</option>
+                <option value="3">Silver</option>
+            </select>
+        </fieldset>
+        <input class="btn" type="submit" id="updateCustomer" value="Update Customer">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>
