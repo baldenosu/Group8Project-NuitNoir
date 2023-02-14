@@ -1,0 +1,62 @@
+<!--orders.hbs-->
+<h1>Orders</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="browse" style="display: block">
+    <p>
+        <strong>Browse Orders</strong>
+    </p>
+    <table border="1" cellpadding="5">
+        <tbody>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Total Price</th>
+                <th>Employee ID</th>
+                <th>Customer ID</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1954-10-09</td>
+                <td>12.99</td>
+                <td>3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1951-02-01</td>
+                <td>23.98</td>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+             <tr>
+                <td>3</td>
+                <td>1953-12-18</td>
+                <td>32.97</td>
+                <td>1</td>
+                <td>3</td>
+            </tr>           
+        </tbody>
+    </table> 
+</div>
+<p>&nbsp;</p>   
+<div id="insert" style="display: block">
+    <form id="createOrder">
+        <legend>
+            <strong>Create Order</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Order Date</label>
+            <input type="date" name="date">
+            <label>Total Price</label>
+            <input type="text" name="price">
+            <label>Employee</label>
+            <input type="number" name="employee">  
+            <label>Customer</label>
+            <input type="text" name="customer"
+        </fieldset>
+        <input class="btn" type="submit" id="createOrder" value="Create Order">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>

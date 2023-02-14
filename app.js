@@ -33,10 +33,29 @@ app.get('/customers', function(req, res)
         res.render('customers');
     });
 
-
 app.get('/employees', function(req, res)
     {
         res.render('employees');
+    });
+
+app.get('/orders', function(req, res)
+    {
+        res.render('orders');
+    });
+
+app.get('/films', function(req, res)
+    {
+        res.render('films');
+    });
+
+app.get('/orders_films', function(req, res)
+    {
+        res.render('orders_films');
+    });
+
+app.get('/customer_levels', function(req, res)
+    {
+        res.render('customer_levels');
     });
 
 /*

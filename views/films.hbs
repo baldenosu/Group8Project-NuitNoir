@@ -1,0 +1,78 @@
+<!--films.hbs-->
+<h1>Films</h1>
+<body>
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+</body>
+<div id="browse" style="display: block">
+    <p>
+        <strong>Browse Films</strong>
+    </p>
+    <table border="1" cellpadding="5">
+        <tbody>
+            <tr>
+                <th>Film ID</th>
+                <th>Film Name</th>
+                <th>Film Price</th>
+                <th>Film in Stock</th>
+                <th>Delete</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>The Maltese Falcon</td>
+                <td>12.99</td>
+                <td>10</td>
+                <td><input class="btn" type="button" value="Delete"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>The Third Man</td>
+                <td>10.99</td>
+                <td>20</td>
+                <td><input class="btn" type="button" value="Delete"></td>
+            </tr>
+             <tr>
+                <td>3</td>
+                <td>Brick</td>
+                <td>8.99</td>
+                <td>30</td>
+                <td><input class="btn" type="button" value="Delete"></td>
+            </tr>           
+        </tbody>
+    </table> 
+</div>
+<p>&nbsp;</p>   
+<div id="insert" style="display: block">
+    <form id="addFilm">
+        <legend>
+            <strong>Add Film</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Film Name</label>
+            <input type="text" name="name">
+            <label>Price</label>
+            <input type="text" name="price">
+            <label>Number in Stock</label>
+            <input type="number" name="stock">  
+        </fieldset>
+        <input class="btn" type="submit" id="addFilm" value="Add Film">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>
+<p>&nbsp;</p> 
+<div id="update" style="display: block">
+    <form id="updateFilm">
+        <legend>
+            <strong>Update Customer</strong>
+        </legend>
+        <fieldset class="fields">
+            <label>Film Name</label>
+            <input type="text" name="name">
+            <label>Price</label>
+            <input type="text" name="price">
+            <label>Number in Stock</label>
+            <input type="number" name="stock">
+        </fieldset>
+        <input class="btn" type="submit" id="updateFilm" value="Update Film">
+        <input class="btn" type="button" value="Cancel">
+    </form>
+</div>
