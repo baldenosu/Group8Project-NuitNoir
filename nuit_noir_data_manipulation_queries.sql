@@ -29,3 +29,37 @@ VALUES (:employee_name_Input, :employee_title_Input);
 UPDATE Employees 
 SET employee_name = :employee_name_Input, employee_title = :employee_title_Input
 WHERE employee_name = :employee_name_from_the_Update_Form;
+
+--Films
+
+--Browsing Films table.
+SELECT * FROM Films;
+
+-- Adding a film to the Films table.
+INSERT INTO Films(film_name, film_price, film_in_stock)
+VALUES (:film_name_Input, :film_price_Input, :film_in_stock_Input);
+
+--Update a Films data based on input from Update Film form 
+UPDATE Films
+SET film_name = :film_name_Input, film_price = :film_price_Input, film_in_stock = :film_in_stock_Input
+WHERE film_name = :film_name_from_the_Update_Form;
+
+--Orders
+
+--Browsing Orders table.
+SELECT * FROM Orders;
+
+--Creating an Order
+INSERT INTO Orders(order_date, total_price, employee_id, customer_id)
+VALUES (:order_date_Input, :total_price_Input, :employee_id_Input, :customer_id_Input);
+
+
+--Orders_Films
+
+--Browsing Orders_Films table.
+SELECT * FROM Orders_Films;
+
+--Customer_Levels
+
+--Browsing Customer Levels table.
+SELECT * FROM Customer_Levels;
