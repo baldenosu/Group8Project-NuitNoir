@@ -8,36 +8,26 @@
         <strong>Browse Customers</strong>
     </p>
     <table border="1" cellpadding="5">
-        <tbody>
+        <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th>Customer Level</th>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Wyatt Earp</td>
-                <td>326 Allen Street, Tombstone, AZ 85638</td>
-                <td>helliscomingwithme@gmail.com</td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Virgil Earp</td>
-                <td>408 AZ-80, Tombstone, AZ 85638</td>
-                <td>holdonnothin@gmail.com</td>
-                <td>2</td>
-            </tr>
-             <tr>
-                <td>3</td>
-                <td>Morgan Earp</td>
-                <td>417 E Allen St, Tombstone, AZ 85638</td>
-                <td>hiya@gmail.com</td>
-                <td>3</td>
-            </tr>           
-        </tbody>
+        </thead>
+    <tbody>
+        {{#each data}}
+        <tr>
+            <td>{{this.customer_id}}</td>
+            <td>{{this.customer_name}}</td>
+            <td>{{this.customer_address}}</td>
+            <td>{{this.customer_email}}</td>
+            <td>{{this.customer_level_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>        
     </table> 
 </div>
 <p>&nbsp;</p>   

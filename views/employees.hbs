@@ -8,27 +8,23 @@
         <strong>Browse Employees</strong>
     </p>
     <table border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
         <tbody>
+            {{#each data}}
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Title</th>
+                <td>{{this.employee_id}}</td>
+                <td>{{this.employee_name}}</td>
+                <td>{{this.employee_title}}</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Dominic Chavez</td>
-                <td>Manager</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>James Balden</td>
-                <td>Manager</td>
-            </tr>
-             <tr>
-                <td>3</td>
-                <td>Cole Phelps</td>
-                <td>Clerk</td>
-            </tr>           
+            {{/each}}
         </tbody>
     </table> 
 </div>
