@@ -5,6 +5,9 @@
 // Express
 var express = require('express');
 var app = express();
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public'))
 PORT = 9037;
 const path = require('path');
 // Database
@@ -26,19 +29,78 @@ app.get('/', function(req, res)
 
 app.get('/customers', function(req, res)
     {
-        let query1 = "SELECT * FROM Customers;";
+        let query1 = `SELECT * FROM Customers;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('customers', {data: rows});
         })
     });
 
+app.post('/add-customer-ajax', function(req, res)
+{
+    let data = req.body;
+    let customer_level_id = parseInt(data.customer_level_id)
+    if (isNaN(customer_level_id))
+    {
+        customer_level_id = "NULL"
+    }
+
+    query1 = `INSERT INTO Customers (customer_name, customer_address, customer_email, customer_level_id) VALUES ('${data.customer_name}', '${data.customer_address}', '${data.customer_email}', ${customer_level_id})`;
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            query2 = `SELECT * FROM Customers;`;
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
+    
+
 app.get('/employees', function(req, res)
     {
-        let query2 = "SELECT * FROM Employees;";
-        db.pool.query(query2, function(error, rows, fields){
+        let query1 = `SELECT * FROM Employees;`;
+        db.pool.query(query1, function(error, rows, fields){
             res.render('employees', {data: rows});
         })
     });
+
+app.post('/add-employee-ajax', function(req, res)
+{
+    let data = req.body;
+    query1 = `INSERT INTO Employees (employee_name, employee_title) VALUES ('${data.employee_name}', '${data.employee_title}')`;
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            query2 = `SELECT * FROM Employees;`;
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
+});
 
 app.get('/orders', function(req, res)
     {
