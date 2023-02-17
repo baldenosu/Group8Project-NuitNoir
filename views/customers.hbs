@@ -3,7 +3,7 @@
 <body>
     [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
 </body>
-<div id="browse" style="display: block">
+{{!-- <div id="browse" style="display: block">
     <p>
         <strong>Browse Customers</strong>
     </p>
@@ -30,25 +30,52 @@
     </tbody>        
     </table> 
 </div>
-<p>&nbsp;</p>   
+<p>&nbsp;</p>    --}}
 <div id="insert" style="display: block">
-    <form id="addCustomer">
-        <legend>
-            <strong>Add Customer</strong>
-        </legend>
-        <fieldset class="fields">
-            <label>Name</label>
-            <input type="text" name="name">
-            <label>Address</label>
-            <input type="text" name="address">
-            <label>Email</label>
-            <input type="email" name="email">
-            <label>Customer Level</label>
-            <input type="number" name="customerLevel">    
-        </fieldset>
-        <input class="btn" type="submit" id="addCustomer" value="Add Customer">
-        <input class="btn" type="button" value="Cancel">
+    {{!-- Create a table --}}
+    <h3>Browse Customers</h3>
+    <table id="customer-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+
+            {{#each data}}
+            <tr>
+                <td>{{this.customer_id}}</td>
+                <td>{{this.customer_name}}</td>
+                <td>{{this.customer_address}}</td>
+                <td>{{this.customer_email}}</td>
+                <td>{{this.customer_level_id}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{!-- Form to add a record to the table  --}}
+    <h3>Add Customer</h3>
+    <form id="add-customer-form-ajax">
+        <label for="input-customer_name">Name: </label>
+        <input type="text" name="input-customer_name" id="input-customer_name">
+        
+        <label for="input-customer_address">Address: </label>
+        <input type="text" name="input-customer_address" id="input-customer_address">
+
+        <label for="input-customer_email">Email: </label>
+        <input type="email" name="input-customer_email" id="input-customer_email">
+
+        <label for="input-customer_level_id">Customer Level: </label>
+        <input type="number" name="input-customer_level_id" id="input-customer_level_id" min="1" max="3">
+
+        <input type="submit">
     </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_customer.js"></script>
 </div>
 <p>&nbsp;</p> 
 <div id="update" style="display: block">
