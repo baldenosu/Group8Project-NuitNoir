@@ -3,11 +3,10 @@
 <body>
     [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
 </body>
-<div id="browse" style="display: block">
-    <p>
-        <strong>Browse Employees</strong>
-    </p>
-    <table border="1" cellpadding="5">
+<div id="insert" style="display: block">
+    {{!-- Create a table --}}
+    <h3>Browse Employees</h3>
+    <table id="employee-table" border="1" cellpadding="5">
         <thead>
             <tr>
                 {{#each data.[0]}}
@@ -26,37 +25,18 @@
             </tr>
             {{/each}}
         </tbody>
-    </table> 
-</div>
-<p>&nbsp;</p>   
-<div id="insert" style="display: block">
-    <form id="addEmployee">
-        <legend>
-            <strong>Add Employee</strong>
-        </legend>
-        <fieldset class="fields">
-            <label>Name</label>
-            <input type="text" name="name">
-            <label>Title</label>
-            <input type="text" name="title">  
-        </fieldset>
-        <input class="btn" type="submit" id="addEmployee" value="Add Employee">
-        <input class="btn" type="button" value="Cancel">
+    </table>
+    {{!-- Form to add a record to the table  --}}
+    <h3>Add Employee</h3>
+    <form id="add-employee-form-ajax">
+        <label for="input-employee_name">Name: </label>
+        <input type="text" name="input-employee_name" id="input-employee_name">
+        
+        <label for="input-employee_title">Title: </label>
+        <input type="text" name="input-employee_title" id="input-employee_title">
+
+        <input type="submit">
     </form>
-</div>
-<p>&nbsp;</p> 
-<div id="update" style="display: block">
-    <form id="updateEmployee">
-        <legend>
-            <strong>Update Employee</strong>
-        </legend>
-        <fieldset class="fields">
-            <label>Name</label>
-            <input type="text" name="name">
-            <label>Title</label>
-            <input type="text" name="title">
-        </fieldset>
-        <input class="btn" type="submit" id="updateEmployee" value="Update Employee">
-        <input class="btn" type="button" value="Cancel">
-    </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+    <script src="./js/add_employee.js"></script>
 </div>

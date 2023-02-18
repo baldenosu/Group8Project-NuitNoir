@@ -29,9 +29,22 @@ app.get('/', function(req, res)
 
 app.get('/customers', function(req, res)
     {
-        let query1 = `SELECT * FROM Customers;`;
+        let query1;
+        if (req.query.customer_name === undefined)
+        {
+            query1 = `SELECT * FROM Customers;`;
+        }
+        else
+        {
+            query1 = `SELECT * FROM Customers WHERE customer_name LIKE  "$req.query.customer_name}%"`
+        }
+        let query2 = `SELECT * FROM Customer_Levels;`;
         db.pool.query(query1, function(error, rows, fields){
-            res.render('customers', {data: rows});
+            let customers = rows;
+            db.pool.query(query2, (error, rows, fields) => {
+                let customer_level = rows;
+                return res.render('customers', {data: customers, customer_level: customer_level});
+            })
         })
     });
 
@@ -66,7 +79,41 @@ app.post('/add-customer-ajax', function(req, res)
         }
     })
 });
-    
+
+app.put('/put-customer-ajax', function(req, res, next){
+    let data = req.body;
+  
+    let customerLevel = parseInt(data.customer_level);
+    let customerName = parseInt(data.customer_name);
+  
+    let queryUpdateCustomerLevel = `UPDATE Customers SET customer_level_id = ? WHERE customer_id = ?`;
+    let selectCustomerLevel = `SELECT * FROM Customer_Levels WHERE customer_level_id = ?`
+  
+          // Run the 1st query
+          db.pool.query(queryUpdateCustomerLevel, [customerLevel, customerName], function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(selectCustomerLevel, [customerLevel], function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
 
 app.get('/employees', function(req, res)
     {

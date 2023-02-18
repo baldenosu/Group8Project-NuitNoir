@@ -11,7 +11,7 @@ addCustomerForm.addEventListener("submit", function (e) {
     let inputCustomerName = document.getElementById("input-customer_name");
     let inputCustomerAddress = document.getElementById("input-customer_address");
     let inputCustomerEmail = document.getElementById("input-customer_email");
-    let inputCustomerLevelId = document.getElementById("input-customer_level_id");
+    let inputCustomerLevelId = document.getElementById("input-customer_level_id-ajax");
 
     // Get the values from the form fields
     let customerNameValue = inputCustomerName.value;
@@ -91,7 +91,16 @@ addRowToTable = (data) => {
     row.appendChild(customerAddressCell);
     row.appendChild(customerEmailCell);
     row.appendChild(customerLevelIdCell);
+
+     // Add a custom row attribute so the deleteRow function can find a newly added row
+     row.setAttribute('data-value', newRow.customer_level_id);   
     
     // Add the row to the table
     currentTable.appendChild(row);
+
+    let selectMenu = document.getElementById("mySelect");
+    let option = document.createElement("option");
+    option.text = newRow.customer_name;
+    option.value = newRow.customer_level_id;
+    selectMenu.add(option);
 }
