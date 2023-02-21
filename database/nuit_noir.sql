@@ -28,7 +28,7 @@ CREATE TABLE `Customers` (
   `customer_name` varchar(50) NOT NULL,
   `customer_address` varchar(50) NOT NULL,
   `customer_email` varchar(50) NOT NULL,
-  `customer_level_id` int(11) NOT NULL
+  `customer_level_id` int(11) NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --

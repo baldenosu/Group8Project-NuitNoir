@@ -44,6 +44,9 @@ UPDATE Films
 SET film_name = :film_name_Input, film_price = :film_price_Input, film_in_stock = :film_in_stock_Input
 WHERE film_name = :film_name_from_the_Update_Form;
 
+--Delete a Film from the Films table
+DELETE FROM Films WHERE film_id = :film_id_selected_from_Films_page
+
 --Orders
 
 --Browsing Orders table.
@@ -59,7 +62,15 @@ VALUES (:order_date_Input, :total_price_Input, :employee_id_Input, :customer_id_
 --Browsing Orders_Films table.
 SELECT * FROM Orders_Films;
 
+--Adding Orders_Films to Orders_Films intersection table.
+INSERT INTO Orders_Has_Films(order_id, film_id)
+VALUES (:order_id_Input, :film_id_Input);
+
 --Customer_Levels
 
 --Browsing Customer Levels table.
 SELECT * FROM Customer_Levels;
+
+--Adding a Customer Level to the Customer Level table
+INSERT INTO Customer_Levels(level_name, level_description, discount_percent)
+VALUES (:level_name_Input, :level_description_Input, :discount_percent_Input);
