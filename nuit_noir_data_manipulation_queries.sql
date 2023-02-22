@@ -50,17 +50,27 @@ DELETE FROM Films WHERE film_id = :film_id_selected_from_Films_page
 --Orders
 
 --Browsing Orders table.
-SELECT * FROM Orders;
+SELECT * FROM Orders
+SELECT Orders.order_id, Orders.order_date, Orders.total_price, Employees.employee_name, Customers.customer_name, Films.film_name FROM Orders
+INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
+INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
+JOIN Films ON Orders_Films.film_id = Films.film_id
+ORDER BY Orders.order_id ASC;
 
 --Creating an Order
 INSERT INTO Orders(order_date, total_price, employee_id, customer_id)
 VALUES (:order_date_Input, :total_price_Input, :employee_id_Input, :customer_id_Input);
-
+INSERT INTO Orders_Films(order_id, film_id)
+VALUES (:order_id_Input, :film_id_Input);
 
 --Orders_Films
 
 --Browsing Orders_Films table.
 SELECT * FROM Orders_Films;
+SELECT Orders_Films.order_id, Films.film_name FROM Orders_Films
+JOIN Films ON Orders_Films.film_id = Films.film_id
+ORDER BY Orders_Films.order_id ASC;
 
 --Adding Orders_Films to Orders_Films intersection table.
 INSERT INTO Orders_Films(order_id, film_id)
