@@ -124,11 +124,9 @@ CREATE TABLE `Orders` (
   `total_price` decimal(19,2) NOT NULL,
   `employee_id` int(11),
   `customer_id` int(11),
-  `film_id` int(11),
   PRIMARY KEY (order_id),
   FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`) ON DELETE SET NULL,
   FOREIGN KEY (`customer_id`) REFERENCES `Customers`(`customer_id`) ON DELETE SET NULL,
-  FOREIGN KEY (`film_id`) REFERENCES `Films`(`film_id`) ON DELETE SET NULL
 );
 
 
