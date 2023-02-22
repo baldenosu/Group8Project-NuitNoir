@@ -124,9 +124,11 @@ CREATE TABLE `Orders` (
   `total_price` decimal(19,2) NOT NULL,
   `employee_id` int(11),
   `customer_id` int(11),
+  `film_id` int(11),
   PRIMARY KEY (order_id),
   FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`) ON DELETE SET NULL,
-  FOREIGN KEY (`customer_id`) REFERENCES `Customers`(`customer_id`) ON DELETE SET NULL
+  FOREIGN KEY (`customer_id`) REFERENCES `Customers`(`customer_id`) ON DELETE SET NULL,
+  FOREIGN KEY (`film_id`) REFERENCES `Films`(`film_id`) ON DELETE SET NULL
 );
 
 
@@ -134,12 +136,12 @@ CREATE TABLE `Orders` (
 -- Dumping data for table `Orders`
 --
 
-INSERT INTO `Orders` (`order_id`, `order_date`, `total_price`, `employee_id`, `customer_id`) VALUES
-(1, '1954-10-09', '12.99', 3, 1),
-(2, '1951-02-01', '23.98', 2, 2),
-(3, '1953-12-18', '32.97', 1, 3),
-(4, '1952-01-01', '23.98', 2, 4),
-(5, '1955-12-31', '32.97', 3, 3);
+INSERT INTO `Orders` (`order_id`, `order_date`, `total_price`, `employee_id`, `customer_id`, `film_id`) VALUES
+(1, '1954-10-09', '12.99', 3, 1, 1),
+(2, '1951-02-01', '23.98', 2, 2, 2),
+(3, '1953-12-18', '32.97', 1, 3, 3),
+(4, '1952-01-01', '23.98', 2, 4, 1),
+(5, '1955-12-31', '32.97', 3, 3, 2);
 
 
 --
