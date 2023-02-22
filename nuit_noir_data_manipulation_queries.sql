@@ -63,7 +63,7 @@ VALUES (:order_date_Input, :total_price_Input, :employee_id_Input, :customer_id_
 SELECT * FROM Orders_Films;
 
 --Adding Orders_Films to Orders_Films intersection table.
-INSERT INTO Orders_Has_Films(order_id, film_id)
+INSERT INTO Orders_Films(order_id, film_id)
 VALUES (:order_id_Input, :film_id_Input);
 
 --Customer_Levels

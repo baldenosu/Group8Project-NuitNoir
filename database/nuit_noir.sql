@@ -18,6 +18,7 @@ CREATE TABLE `Customers` (
   PRIMARY KEY (customer_id),
   FOREIGN KEY (customer_level_id) REFERENCES Customer_Levels(customer_level_id) ON DELETE SET NULL
 );
+
 -- Insert data for 'Customers'
 INSERT INTO `Customers` (`customer_name`, `customer_address`, `customer_email`, `customer_level_id`) VALUES
 ('Wyatt Earp', '326 Allen Street, Tombstone, AZ 85638', 'helliscomingwithme@gmail.com', 1),
@@ -56,6 +57,7 @@ INSERT INTO `Employees` (`employee_name`, `employee_title`) VALUES
 ('Dominic Chavez', 'Manager'),
 ('James Balden', 'Manager'),
 ('Cole Phelps', 'Clerk');
+
 -------------------------- Films Table -------------------------------------------------
 DROP TABLE IF EXISTS `Films`;
 -- Create table for 'Films'
@@ -72,6 +74,7 @@ INSERT INTO `Films` (`film_name`, `film_price`, `film_in_stock`) VALUES
 ('The Maltese Falcon', '12.99', 10),
 ('The Third Man', '10.99', 20),
 ('Brick', '8.99', 30);
+
 -------------------------- Orders Table -------------------------------------------------
 DROP TABLE IF EXISTS `Orders`;
 -- Create table for 'Orders'
@@ -91,6 +94,7 @@ INSERT INTO `Orders` (`order_date`, `total_price`, `employee_id`, `customer_id`)
 ('1954-10-09', '12.99', 3, 1),
 ('1951-02-01', '23.98', 2, 2),
 ('1953-12-18', '32.97', 1, 3);
+
 -------------------------- Orders_Films Table -------------------------------------------------
 DROP TABLE IF EXISTS `Orders_Films`;
 -- Create table for 'Orders_Films'
@@ -106,6 +110,7 @@ INSERT INTO `Orders_Films` (`order_id`, `film_id`) VALUES
 (1, 2),
 (2, 1),
 (3, 3);
+
 
 -- Wrap Up Settings
 SET FOREIGN_KEY_CHECKS = 1;
