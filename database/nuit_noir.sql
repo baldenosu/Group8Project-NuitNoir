@@ -91,18 +91,18 @@ INSERT INTO `Orders` (`order_date`, `total_price`, `employee_id`, `customer_id`)
 ('1954-10-09', '12.99', 3, 1),
 ('1951-02-01', '23.98', 2, 2),
 ('1953-12-18', '32.97', 1, 3);
--------------------------- Orders_Has_Films Table -------------------------------------------------
-DROP TABLE IF EXISTS `Orders_Has_Films`;
--- Create table for 'Orders_Has_Films'
-CREATE TABLE `Orders_Has_Films` (
+-------------------------- Orders_Films Table -------------------------------------------------
+DROP TABLE IF EXISTS `Orders_Films`;
+-- Create table for 'Orders_Films'
+CREATE TABLE `Orders_Films` (
   `order_id` int(11),
   `film_id` int(11),
   FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE SET NULL,
   FOREIGN KEY (film_id) REFERENCES Films(film_id) ON DELETE RESTRICT
 );
 
--- Insert data for 'Orders_Has_Films'
-INSERT INTO `Orders_Has_Films` (`order_id`, `film_id`) VALUES
+-- Insert data for 'Orders_Films'
+INSERT INTO `Orders_Films` (`order_id`, `film_id`) VALUES
 (1, 2),
 (2, 1),
 (3, 3);
