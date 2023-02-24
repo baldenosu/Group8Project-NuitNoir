@@ -42,8 +42,22 @@ app.get('/customers', function(req, res)
         db.pool.query(query1, function(error, rows, fields){
             let customers = rows;
             db.pool.query(query2, (error, rows, fields) => {
-                let customer_level = rows;
-                return res.render('customers', {data: customers, customer_level: customer_level});
+                let customer_levels = rows;
+                let customerLevelMap = {}
+                customer_levels.map(customerLevel => {
+                    let customerLevelId = parseInt(customerLevel.customer_level_id, 10);
+                    customerLevelMap[customerLevelId] = customer_levels["level_name"]
+                    // console.log("customerLevelId: ", customerLevelId)
+                    // console.log("customerLevelMap: ", customerLevelMap)
+                    // console.log("customerLevel: ", customerLevel)
+                    // console.log("customer_levels: ", customer_levels)
+                })
+                // customer = customers.map(person => {
+                //     return Object.assign(person, {customer_level_id: customerLevelMap[customer_levels.customer_level_id]})
+                // })
+                // console.log(customers)
+
+                return res.render('customers', {data: customers, customer_level: customer_levels});
             })
         })
     });
@@ -114,6 +128,33 @@ app.put('/put-customer-ajax', function(req, res, next){
                   })
               }
   })});
+
+app.delete('/delete-customer-ajax/', function(req,res,next){
+    let data = req.body;
+    let customerID = parseInt(data.customer_id);
+    let deleteNNCustomer = `DELETE FROM Customers WHERE customer_id = ?`;
+    let deleteNNOrder = `DELETE FROM Orders WHERE customer_id = ?`;
+
+        db.pool.query(deleteNNOrder, [customerID], function(error, rows, fields){
+            if (error) {
+                console.log(error);
+                res.sendStatus(400);
+            }
+            else
+            {
+                db.pool.query(deleteNNCustomer, [customerID], function(error, rows, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus(400);
+                    }
+                    else
+                    {
+                        res.sendStatus(204);
+                    }
+                })
+            }
+        })
+});
 
 app.get('/employees', function(req, res)
     {

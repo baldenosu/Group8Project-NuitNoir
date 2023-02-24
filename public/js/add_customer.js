@@ -78,12 +78,20 @@ addRowToTable = (data) => {
     let customerEmailCell = document.createElement("TD");
     let customerLevelIdCell = document.createElement("TD");
 
+    let deleteCell = document.createElement("TD");
+
     // Fill the cells with correct data
-    customerIdCell.innerText = newRow.id;
-    customerNameCell.innerText = newRow.fname;
-    customerAddressCell.innerText = newRow.lname;
-    customerEmailCell.innerText = newRow.homeworld;
-    customerLevelIdCell.innerText = newRow.age;
+    customerIdCell.innerText = newRow.customer_id;
+    customerNameCell.innerText = newRow.customer_name;
+    customerAddressCell.innerText = newRow.customer_address;
+    customerEmailCell.innerText = newRow.customer_email;
+    customerLevelIdCell.innerText = newRow.customer_level_id;
+
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteCustomer(newRow.customer_id);
+    }
 
     // Add the cells to the row 
     row.appendChild(customerIdCell);
@@ -91,9 +99,10 @@ addRowToTable = (data) => {
     row.appendChild(customerAddressCell);
     row.appendChild(customerEmailCell);
     row.appendChild(customerLevelIdCell);
+    row.appendChild(deleteCell);
 
      // Add a custom row attribute so the deleteRow function can find a newly added row
-     row.setAttribute('data-value', newRow.customer_level_id);   
+     row.setAttribute('data-value', newRow.customer_id);   
     
     // Add the row to the table
     currentTable.appendChild(row);
