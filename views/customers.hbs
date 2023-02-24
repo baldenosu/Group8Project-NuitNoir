@@ -1,4 +1,5 @@
 <!-- customers.hbs -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <h1>Customers</h1>
 <body>
     [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
@@ -14,6 +15,7 @@
                     {{@key}}
                 </th>
                 {{/each}}
+                <th>delete</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +26,7 @@
                 <td>{{this.customer_address}}</td>
                 <td>{{this.customer_email}}</td>
                 <td>{{this.customer_level_id}}</td>
+                <td><button onclick="deleteCustomer({{this.customer_id}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -75,4 +78,5 @@
         <input type="submit">
     </form>
     <script src="./js/update_customer.js"></script>
+    <script src="./js/delete_customer.js"></script>
 </div>
