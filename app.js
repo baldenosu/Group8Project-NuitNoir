@@ -158,7 +158,7 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
 
 app.get('/employees', function(req, res)
     {
-        let query1 = `SELECT * FROM Employees;`;
+        let query1 = `SELECT employee_id, employee_name, employee_title FROM Employees;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('employees', {data: rows});
         })
@@ -190,14 +190,32 @@ app.post('/add-employee-ajax', function(req, res)
     })
 });
 
-app.get('/orders', function(req, res)
-    {
-        res.render('orders');
-    });
-
 app.get('/films', function(req, res)
     {
-        res.render('films');
+        let query1 = `SELECT film_id AS ID, 
+            film_name AS Film, 
+            film_price AS Price, 
+            film_in_stock AS 'In Stock' 
+            FROM Films;`;
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('films', {data: rows});
+        })
+    });
+
+app.get('/orders', function(req, res)
+    {
+        let query1 = `SELECT order_id AS ID,
+        order_date AS Date,
+        total_price AS 'Total Price',
+        Employees.employee_name AS Employee,
+        Customers.customer_name AS Customer
+        FROM Orders
+        INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
+        INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+        ORDER BY Orders.order_id ASC;`;
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('orders', {data: rows});
+        })
     });
 
 app.get('/orders_films', function(req, res)

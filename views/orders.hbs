@@ -3,60 +3,30 @@
 <body>
     [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
 </body>
-<div id="browse" style="display: block">
-    <p>
-        <strong>Browse Orders</strong>
-    </p>
-    <table border="1" cellpadding="5">
+<div id="insert" style="display: block">
+    {{!-- Create a table --}}
+    <h3>Browse Orders</h3>
+    <table id="order-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
         <tbody>
+            {{#each data}}
             <tr>
-                <th>Order ID</th>
-                <th>Order Date</th>
-                <th>Total Price</th>
-                <th>Employee ID</th>
-                <th>Customer ID</th>
-                <th>Film(s)</th>
+                <td>{{this.ID}}</td>
+                <td>{{this.Date}}</td>
+                {{!-- date.toLocaleDateString("en-US",{timeZone: 'UTC'}).slice(0,10) --}}
+                <td>{{this.[Total Price]}}</td>
+                <td>{{this.Employee}}</td>
+                <td>{{this.Customer}}</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>1954-10-09</td>
-                <td>12.99</td>
-                <td>Cole Phelps</td>
-                <td>Wyatt Earp</td>
-                <td>The Third Man</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>1951-02-01</td>
-                <td>23.98</td>
-                <td>James Balden</td>
-                <td>Virgil Earp</td>
-                <td>The Maltese Falcon</td>
-            </tr>
-             <tr>
-                <td>3</td>
-                <td>1953-12-18</td>
-                <td>32.97</td>
-                <td>Dominic Chavez</td>
-                <td>Morgan Earp</td>
-                <td>Brick</td>
-            </tr>
-             <tr>
-                <td>4</td>
-                <td>1952-01-01</td>
-                <td>23.98</td>
-                <td>James Balden</td>
-                <td>Ike Clanton</td>
-                <td>The Third Man</td>
-            </tr>
-             <tr>
-                <td>5</td>
-                <td>1955-12-31</td>
-                <td>32.97</td>
-                <td>Cole Phelps</td>
-                <td>Morgan Earp</td>
-                <td>The Maltese Falcon</td>
-            </tr>               
+            {{/each}}
         </tbody>
     </table> 
 </div>
