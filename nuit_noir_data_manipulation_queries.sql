@@ -47,7 +47,10 @@ WHERE film_name = :film_name_from_the_Update_Form;
 --Orders
 
 --Browsing Orders table.
-SELECT * FROM Orders;
+SELECT Orders.order_id, Employees.employee_name, Customers.customer_name FROM Orders
+INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
+INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+ORDER BY Orders.order_id ASC;
 
 --Creating an Order
 INSERT INTO Orders(order_date, total_price, employee_id, customer_id)
