@@ -46,17 +46,11 @@ app.get('/customers', function(req, res)
                 let customerLevelMap = {}
                 customer_levels.map(customerLevel => {
                     let customerLevelId = parseInt(customerLevel.customer_level_id, 10);
-                    customerLevelMap[customerLevelId] = customer_levels["level_name"]
-                    // console.log("customerLevelId: ", customerLevelId)
-                    // console.log("customerLevelMap: ", customerLevelMap)
-                    // console.log("customerLevel: ", customerLevel)
-                    // console.log("customer_levels: ", customer_levels)
+                    customerLevelMap[customerLevelId] = customerLevel['level_name']
                 })
-                // customer = customers.map(person => {
-                //     return Object.assign(person, {customer_level_id: customerLevelMap[customer_levels.customer_level_id]})
-                // })
-                // console.log(customers)
-
+                customer = customers.map(person => {
+                    return Object.assign(person, {customer_level_id: customerLevelMap[person.customer_level_id]})
+                })
                 return res.render('customers', {data: customers, customer_level: customer_levels});
             })
         })
