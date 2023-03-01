@@ -4,31 +4,25 @@
     [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
 </body>
 <div id="browse" style="display: block">
-    <p>
-        <strong>Browse Orders_Films</strong>
-    </p>
-    <table border="1" cellpadding="5">
+    {{!-- Create Order Films Intersection Table--}}
+    <h3>Browse Orders_Films</h3>
+    <table id="order_films-table" border="1" cellpadding="5">
+        <thead>
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
         <tbody>
+            {{#each data}}
             <tr>
-                <th>Order ID</th>
-                <th>Film Name</th>
+                <td>{{this.[Order ID]}}</td>
+                <td>{{this.Film}}</td>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>The Third Man</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>The Maltese Falcon</td>
-            </tr>
-             <tr>
-                <td>3</td>
-                <td>Brick</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Brick</td>
-            </tr>           
+            {{/each}}
         </tbody>
     </table> 
 </div>

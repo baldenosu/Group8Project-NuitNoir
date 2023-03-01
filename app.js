@@ -199,14 +199,14 @@ app.get('/films', function(req, res)
 app.get('/orders', function(req, res)
     {
         let query1 = `SELECT order_id AS ID,
-        order_date AS Date,
-        total_price AS 'Total Price',
-        Employees.employee_name AS Employee,
-        Customers.customer_name AS Customer
-        FROM Orders
-        INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
-        INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
-        ORDER BY Orders.order_id ASC;`;
+            order_date AS Date,
+            total_price AS 'Total Price',
+            Employees.employee_name AS Employee,
+            Customers.customer_name AS Customer
+            FROM Orders
+            INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
+            INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+            ORDER BY Orders.order_id ASC;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('orders', {data: rows});
         })
@@ -214,12 +214,25 @@ app.get('/orders', function(req, res)
 
 app.get('/orders_films', function(req, res)
     {
-        res.render('orders_films');
+        let query1 = `SELECT order_id AS 'Order ID', film_name AS Film 
+        FROM Orders_Films
+        INNER JOIN Films ON Orders_Films.film_id = Films.film_id
+        ORDER BY order_id ASC;`;
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('orders_films', {data: rows});
+        })
     });
 
 app.get('/customer_levels', function(req, res)
     {
-        res.render('customer_levels');
+        let query1 = `SELECT customer_level_id AS ID, 
+            level_name AS 'Level Name', 
+            level_description AS Description, 
+            discount_percent AS 'Discount Percent' 
+            FROM Customer_Levels;`;
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('customer_levels', {data: rows});
+        })
     });
 
 /*
