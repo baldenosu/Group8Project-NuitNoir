@@ -187,10 +187,10 @@ app.post('/add-employee-ajax', function(req, res)
 app.get('/films', function(req, res)
     {
         let query1 = `SELECT film_id AS ID, 
-            film_name AS Film, 
-            film_price AS Price, 
-            film_in_stock AS 'In Stock' 
-            FROM Films;`;
+        film_name AS Film, 
+        film_price AS Price, 
+        film_in_stock AS 'In Stock' 
+        FROM Films;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('films', {data: rows});
         })
@@ -198,15 +198,18 @@ app.get('/films', function(req, res)
 
 app.get('/orders', function(req, res)
     {
-        let query1 = `SELECT order_id AS ID,
-            order_date AS Date,
-            total_price AS 'Total Price',
-            Employees.employee_name AS Employee,
-            Customers.customer_name AS Customer
-            FROM Orders
-            INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
-            INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
-            ORDER BY Orders.order_id ASC;`;
+        let query1 = `SELECT Orders.order_id AS ID,
+        Orders.order_date AS Date,
+        Orders.total_price AS 'Total Price',
+        Employees.employee_name AS Employee,
+        Customers.customer_name AS Customer,
+        Films.film_name AS 'Film(s)'
+        FROM Orders
+        INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
+        INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+        JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
+        JOIN Films ON Orders_Films.film_id = Films.film_id           
+        ORDER BY Orders.order_id ASC;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('orders', {data: rows});
         })
@@ -226,10 +229,10 @@ app.get('/orders_films', function(req, res)
 app.get('/customer_levels', function(req, res)
     {
         let query1 = `SELECT customer_level_id AS ID, 
-            level_name AS 'Level Name', 
-            level_description AS Description, 
-            discount_percent AS 'Discount Percent' 
-            FROM Customer_Levels;`;
+        level_name AS 'Level Name', 
+        level_description AS Description, 
+        discount_percent AS 'Discount Percent' 
+        FROM Customer_Levels;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('customer_levels', {data: rows});
         })
