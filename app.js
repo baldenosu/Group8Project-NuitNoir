@@ -13,12 +13,27 @@ const path = require('path');
 // Database
 var db = require('./database/db-connector');
 
+// // Handlebars Helpers set up
+// // Code Citation: https://www.youtube.com/watch?v=2BoSBaWvFhM
+// const hbs = exphbs.create({
+//     extname: ".hbs",
+
+//     // helpers for working with data manipulated with handlebars
+//     helpers: {
+//         // Formats dates to more reader friendly output
+//         dateFormat: function(date) {
+//             return date.toLocaleDateString("en-US");
+//         }
+//     }
+// });
+
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 app.set('views', path.join(__dirname, 'views'));
+
 /*
     ROUTES
 */
@@ -210,10 +225,82 @@ app.get('/orders', function(req, res)
         JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
         JOIN Films ON Orders_Films.film_id = Films.film_id           
         ORDER BY Orders.order_id ASC;`;
+
+        let query2 = `SELECT * FROM Employees;`;
+
+        let query3 = `SELECT * FROM Customers;`;
+
+        let query4 = `SELECT * FROM Films;`;
+
         db.pool.query(query1, function(error, rows, fields){
-            res.render('orders', {data: rows});
+
+            let orders = rows;
+            db.pool.query(query2, (error, rows, fields) => {
+
+                let employees = rows;
+                db.pool.query(query3, (error, rows, fields) => {
+
+                    let customers = rows;
+                    db.pool.query(query4, (error, rows, fields) => {
+
+                        let films = rows;
+                        return res.render('orders', {data: orders, employees: employees, customers: customers, films: films});
+                    })
+                })
+            })     
         })
     });
+
+app.post('/add-order-ajax', function(req, res)
+{
+    let data = req.body;
+
+    query1 = `INSERT INTO Orders (order_date, total_price, employee_id, customer_id) VALUES
+    ('${data.order_date}', '${data.total_price}', '${data.employee_id}', '${data.customer_id}');`;
+    db.pool.query(query1, function(error, rows, fields) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            
+            query3 = `INSERT INTO Orders_Films (order_id, film_id) VALUES
+            ((SELECT order_id FROM Orders WHERE order_id = '${data.order_id})', '${data.film_id}');`;
+            db.pool.query(query3, function(error, rows, fields) {
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                else
+                {
+                    query2 = `SELECT Orders.order_id AS ID,
+                    Orders.order_date AS Date,
+                    Orders.total_price AS 'Total Price',
+                    Employees.employee_name AS Employee,
+                    Customers.customer_name AS Customer,
+                    Films.film_name AS 'Film(s)'
+                    FROM Orders
+                    INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
+                    INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+                    JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
+                    JOIN Films ON Orders_Films.film_id = Films.film_id           
+                    ORDER BY Orders.order_id ASC;`;
+                    db.pool.query(query2, function(error, rows, fields){
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        }
+                        else
+                        {
+                            res.send(rows);
+                        }
+                    })
+                }
+            })
+        }
+    })    
+});
 
 app.get('/orders_films', function(req, res)
     {

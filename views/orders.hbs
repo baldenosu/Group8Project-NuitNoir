@@ -20,7 +20,8 @@
             {{#each data}}
             <tr>
                 <td>{{this.ID}}</td>
-                <td>{{dateFormat this.Date}}</td>
+                {{!-- add to this Date for handlebar helper formatting of the date: dateFormat --}}
+                <td>{{this.Date}}</td>
                 <td>{{this.[Total Price]}}</td>
                 <td>{{this.Employee}}</td>
                 <td>{{this.Customer}}</td>
@@ -42,21 +43,21 @@
 
         <select name="input-employee_id" id="input-employee_id-ajax">
             <option value="">Select Employee</option>
-            {{#each employee_id}}
+            {{#each employees}}
             <option value="{{this.employee_id}}">{{this.employee_name}}</option>
             {{/each}}
         </select>
         
         <select name="input-customer_id" id="input-customer_id-ajax">
             <option value="">Select Customer</option>
-            {{#each customer_id}}
+            {{#each customers}}
             <option value="{{this.customer_id}}">{{this.customer_name}}</option>
             {{/each}}
         </select>
 
         <select name="input-film_id" id="input-film_id-ajax">
             <option value="">Select Film</option>
-            {{#each film_id}}
+            {{#each films}}
             <option value="{{this.film_id}}">{{this.film_name}}</option>
             {{/each}}
         </select>
