@@ -16,9 +16,9 @@ function deleteCustomer(customerID) {
 }
 
 function deleteRow(customerID) {
-    let table = document.getElementById("people-table");
+    let table = document.getElementById("customer-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
-        if (table.row[i].getAttribute("data-value") == customerID) {
+        if (table.rows[i].getAttribute("data-value") == customerID) {
             table.deleteRow(i);
             break;
         }
