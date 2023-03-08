@@ -6,7 +6,7 @@
 <div id="browse" style="display: block">
     {{!-- Create Order Films Intersection Table--}}
     <h3>Browse Orders_Films</h3>
-    <table id="order_films-table" border="1" cellpadding="5">
+    <table id="orders_films-table" border="1" cellpadding="5">
         <thead>
             <tr>
                 {{#each data.[0]}}
@@ -25,20 +25,21 @@
             {{/each}}
         </tbody>
     </table> 
-</div>
-<p>&nbsp;</p>   
-<div id="insert" style="display: block">
-    <form id="addOrdersFilms">
-        <legend>
-            <strong>Add Order_Films</strong>
-        </legend>
-        <fieldset class="fields">
-            <label>Order ID</label>
-            <input type="text" name="orderID">
-            <label>Film Name</label>
-            <input type="text" name="filmID">
-        </fieldset>
-        <input class="btn" type="submit" id="addOrdersFilms" value="Add Orders_Films">
-        <input class="btn" type="button" value="Cancel">
+    {{!-- Form to add a intersection to the Orders_Films table --}}
+    <h3>Add Orders_Films</h3>
+    <form id="add-OrdersFilms-form-ajax">
+        <label for="input-order_id">Order ID: </label>
+        <input type="text" name="input-order_id" id="input-order_id">
+
+        <select name="input-film_id" id="input-film_id-ajax">
+            <option value="">Select Film</option>
+            {{#each films}}
+            <option value="{{this.film_id}}">{{this.film_name}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit">
     </form>
+    {{!-- Embed our javascript to handle the DOM manipulation and AJAX request--}}
+    <script src="./js/add_orders_films.js"></script>
 </div>

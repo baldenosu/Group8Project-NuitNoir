@@ -72,4 +72,5 @@ function updateRow(data, customerID){
             td.innerHTML = parsedData[0].name; 
        }
     }
+    window.location.reload();
 }
