@@ -108,12 +108,17 @@ app.put('/put-customer-ajax', function(req, res, next){
   
     let customerLevel = parseInt(data.customer_level);
     let customerName = parseInt(data.customer_name);
+
+    if (isNaN(customerLevel)) 
+    {
+        customerLevel = "NULL";
+    }
   
-    let queryUpdateCustomerLevel = `UPDATE Customers SET customer_level_id = ? WHERE customer_id = ?`;
+    let queryUpdateCustomerLevel = `UPDATE Customers SET customer_level_id = ${customerLevel} WHERE customer_id = ${customerName}`;
     let selectCustomerLevel = `SELECT * FROM Customer_Levels WHERE customer_level_id = ?`
   
           // Run the 1st query
-          db.pool.query(queryUpdateCustomerLevel, [customerLevel, customerName], function(error, rows, fields){
+          db.pool.query(queryUpdateCustomerLevel, function(error, rows, fields){
               if (error) {
   
               // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -142,27 +147,16 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
     let data = req.body;
     let customerID = parseInt(data.customer_id);
     let deleteNNCustomer = `DELETE FROM Customers WHERE customer_id = ?`;
-    let deleteNNOrder = `DELETE FROM Orders WHERE customer_id = ?`;
-
-        db.pool.query(deleteNNOrder, [customerID], function(error, rows, fields){
-            if (error) {
-                console.log(error);
-                res.sendStatus(400);
-            }
-            else
-            {
-                db.pool.query(deleteNNCustomer, [customerID], function(error, rows, fields) {
-                    if (error) {
-                        console.log(error);
-                        res.sendStatus(400);
-                    }
-                    else
-                    {
-                        res.sendStatus(204);
-                    }
-                })
-            }
-        })
+    db.pool.query(deleteNNCustomer, [customerID], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else
+        {
+            res.sendStatus(204);
+        }
+    })
 });
 
 app.get('/employees', function(req, res)

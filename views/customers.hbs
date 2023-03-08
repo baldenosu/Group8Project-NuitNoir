@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             {{#each data}}
-            <tr>
+            <tr data-value={{this.customer_id}}>
                 <td>{{this.customer_id}}</td>
                 <td>{{this.customer_name}}</td>
                 <td>{{this.customer_address}}</td>

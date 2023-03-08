@@ -57,7 +57,7 @@ addCustomerForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// Customers
+// bsg_people
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
@@ -112,4 +112,5 @@ addRowToTable = (data) => {
     option.text = newRow.customer_name;
     option.value = newRow.customer_level_id;
     selectMenu.add(option);
+    window.location.reload();
 }

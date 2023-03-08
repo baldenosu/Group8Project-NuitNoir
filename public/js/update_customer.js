@@ -18,10 +18,10 @@ updateCustomerForm.addEventListener("submit", function (e) {
     // currently the database table for bsg_people does not allow updating values to NULL
     // so we must abort if being bassed NULL for homeworld
 
-    if (isNaN(customerLevelValue)) 
-    {
-        return;
-    }
+    // if (isNaN(customerLevelValue)) 
+    // {
+    //     return;
+    // }
 
     // Put our data we want to send in a javascript object
     let data = {
