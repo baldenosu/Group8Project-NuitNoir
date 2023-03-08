@@ -13,24 +13,25 @@ const path = require('path');
 // Database
 var db = require('./database/db-connector');
 
-// // Handlebars Helpers set up
-// // Code Citation: https://www.youtube.com/watch?v=2BoSBaWvFhM
-// const hbs = exphbs.create({
-//     extname: ".hbs",
-
-//     // helpers for working with data manipulated with handlebars
-//     helpers: {
-//         // Formats dates to more reader friendly output
-//         dateFormat: function(date) {
-//             return date.toLocaleDateString("en-US");
-//         }
-//     }
-// });
-
 // Handlebars
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', engine({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+
+// Handlebars Helpers set up
+// Code Citation: https://www.youtube.com/watch?v=2BoSBaWvFhM
+const hbs = exphbs.create({
+    extname: ".hbs",
+
+    // helpers for working with data manipulated with handlebars
+    helpers: {
+        // Formats dates to more reader friendly output
+        dateFormat: function(date) {
+            return date.toLocaleDateString("en-US");
+        }
+    }
+});
+
+app.engine('.hbs', hbs.engine);  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 app.set('views', path.join(__dirname, 'views'));
 

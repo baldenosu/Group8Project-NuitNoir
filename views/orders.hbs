@@ -20,8 +20,7 @@
             {{#each data}}
             <tr>
                 <td>{{this.ID}}</td>
-                {{!-- add to this Date for handlebar helper formatting of the date: dateFormat --}}
-                <td>{{this.Date}}</td>
+                <td>{{dateFormat this.Date}}</td>
                 <td>{{this.[Total Price]}}</td>
                 <td>{{this.Employee}}</td>
                 <td>{{this.Customer}}</td>
