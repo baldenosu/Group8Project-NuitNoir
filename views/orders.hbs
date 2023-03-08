@@ -35,28 +35,28 @@
 <h3>Add Order</h3>
 <form id="add-order-form-ajax">
 
-        <label for="input-order_date">Order Date</label>
+        <label for="input-order_date">Order Date: </label>
         <input type="date" name="input-order_date" id="input-order_date">
 
-        <label for="input-total_price">Total Price</label>
+        <label for="input-total_price">Total Price: </label>
         <input type="text" name="input-total_price" id="input-total_price">
 
         <select name="input-employee_id" id="input-employee_id-ajax">
-            <option value="">Select Employee</option>
+            <option value="">Select Employee: </option>
             {{#each employees}}
             <option value="{{this.employee_id}}">{{this.employee_name}}</option>
             {{/each}}
         </select>
         
         <select name="input-customer_id" id="input-customer_id-ajax">
-            <option value="">Select Customer</option>
+            <option value="">Select Customer: </option>
             {{#each customers}}
             <option value="{{this.customer_id}}">{{this.customer_name}}</option>
             {{/each}}
         </select>
 
         <select name="input-film_id" id="input-film_id-ajax">
-            <option value="">Select Film</option>
+            <option value="">Select Film: </option>
             {{#each films}}
             <option value="{{this.film_id}}">{{this.film_name}}</option>
             {{/each}}

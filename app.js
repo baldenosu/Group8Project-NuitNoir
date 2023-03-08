@@ -240,10 +240,6 @@ app.post('/add-film-ajax', function(req, res)
 app.put('/put-film-ajax', function(req, res, next){
     let data = req.body;
   
-    let filmId = parseInt(data.film_id);
-    let filmPrice = parseInt(data.film_price);
-    let filmInStock = parseInt(data.film_in_stock);
-  
     // Code Citation: https://edstem.org/us/courses/32532/discussion/2720506
     let queryUpdateFilms = `UPDATE Films SET film_price = '${data.film_price}', film_in_stock = '${data.film_in_stock}' WHERE Films.film_id = '${parseInt(data.film_id)}'`;
   
@@ -276,6 +272,8 @@ app.delete('/delete-film-ajax/', function(req,res,next){
     })
 });
 
+        
+
 app.get('/orders', function(req, res)
     {
         let query1 = `SELECT Orders.order_id AS ID,
@@ -285,8 +283,8 @@ app.get('/orders', function(req, res)
         Customers.customer_name AS Customer,
         Films.film_name AS 'Film(s)'
         FROM Orders
-        INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
-        INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+        JOIN Employees ON Orders.employee_id = Employees.employee_id
+        JOIN Customers ON Orders.customer_id = Customers.customer_id
         JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
         JOIN Films ON Orders_Films.film_id = Films.film_id           
         ORDER BY Orders.order_id ASC;`;
@@ -316,56 +314,54 @@ app.get('/orders', function(req, res)
         })
     });
 
-// app.post('/add-order-ajax', function(req, res)
-// {
-//     let data = req.body;
+app.post('/add-order-ajax', function(req, res){
+    let data = req.body;
 
-//     query1 = `INSERT INTO Orders (order_date, total_price, employee_id, customer_id) VALUES
-//     ('${data.order_date}', '${data.total_price}', '${data.employee_id}', '${data.customer_id}');`;
-//     db.pool.query(query1, function(error, rows, fields) {
-//         if (error) {
-//             console.log(error)
-//             res.sendStatus(400);
-//         }
-//         // else
-//         // {
-            
-//         //     query3 = `INSERT INTO Orders_Films (order_id, film_id) VALUES
-//         //     ((SELECT order_id FROM Orders WHERE order_id = '${data.order_id})', '${data.film_id}');`;
-//         //     db.pool.query(query3, function(error, rows, fields) {
-//         //         if (error) {
-//         //             console.log(error);
-//         //             res.sendStatus(400);
-//         //         }
-//                 else
-//                 {
-//                     query2 = `SELECT Orders.order_id AS ID,
-//                     Orders.order_date AS Date,
-//                     Orders.total_price AS 'Total Price',
-//                     Employees.employee_name AS Employee,
-//                     Customers.customer_name AS Customer,
-//                     Films.film_name AS 'Film(s)'
-//                     FROM Orders
-//                     INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
-//                     INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
-//                     JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
-//                     JOIN Films ON Orders_Films.film_id = Films.film_id           
-//                     ORDER BY Orders.order_id ASC;`;
-//                     db.pool.query(query2, function(error, rows, fields){
-//                         if (error) {
-//                             console.log(error);
-//                             res.sendStatus(400);
-//                         }
-//                         else
-//                         {
-//                             res.send(rows);
-//                         }
-//                     })
-//                 }
-//             // })
-//         // }
-//     // })    
-// });
+    query1 = `INSERT INTO Orders (order_date, total_price, employee_id, customer_id) VALUES
+    ('${data.order_date}', '${data.total_price}', '${data.employee_id}', '${data.customer_id}');`;
+    db.pool.query(query1, function(error, rows, fields){
+        if (error) {
+            console.log(error)
+            res.sendStatus(400);
+        }  
+        
+        else {
+            // Code Citation: https://www.mysqltutorial.org/mysql-nodejs/insert/
+            let order_id = rows.insertId;
+            query2 = `INSERT INTO Orders_Films (order_id, film_id) VALUES
+            (${order_id}, '${data.film_id}');`;
+            db.pool.query(query2, function(error, rows, fields){
+                if (error) {
+                    console.log(error)
+                    res.sendStatus(400);
+                }
+                else {
+                    query3 = `SELECT Orders.order_id AS ID,
+                    Orders.order_date AS Date,
+                    Orders.total_price AS 'Total Price',
+                    Employees.employee_name AS Employee,
+                    Customers.customer_name AS Customer,
+                    Films.film_name AS 'Film(s)'
+                    FROM Orders
+                    JOIN Employees ON Orders.employee_id = Employees.employee_id
+                    JOIN Customers ON Orders.customer_id = Customers.customer_id
+                    JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
+                    JOIN Films ON Orders_Films.film_id = Films.film_id           
+                    ORDER BY Orders.order_id ASC;`;
+                    db.pool.query(query3, function(error, rows, fields){
+                        if (error) {
+                            console.log(error);
+                            res.sendStatus(400);
+                        }
+                        else {
+                            res.send(rows);
+                        }
+                    })
+                }
+            })           
+        }
+    })    
+});
 
 app.get('/orders_films', function(req, res)
     {

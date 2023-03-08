@@ -94,8 +94,8 @@ addRowToTable = (data) => {
     row.appendChild(filmInStockCell);
     row.appendChild(deleteCell);
     
-     // Add a custom row attribute so the deleteRow function can find a newly added row
-     row.setAttribute('data-value', newRow.film_id);   
+    // Add a custom row attribute so the deleteRow function can find a newly added row
+    row.setAttribute('data-value', newRow.film_id);   
     
     // Add the row to the table
     currentTable.appendChild(row);
@@ -105,5 +105,6 @@ addRowToTable = (data) => {
     option.text = newRow.film_name;
     option.value = newRow.film_id;
     selectMenu.add(option);
+
     window.location.reload();
 }
