@@ -15,14 +15,6 @@ updateCustomerForm.addEventListener("submit", function (e) {
     let customerNameValue = inputCustomerName.value;
     let customerLevelValue = inputCustomerLevel.value;
     
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for homeworld
-
-    // if (isNaN(customerLevelValue)) 
-    // {
-    //     return;
-    // }
-
     // Put our data we want to send in a javascript object
     let data = {
         customer_name: customerNameValue,

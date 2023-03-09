@@ -18,7 +18,12 @@ const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
 
 // Handlebars Helpers set up
-// Code Citation: https://www.youtube.com/watch?v=2BoSBaWvFhM
+
+// Code Citation for Handlebars Helper Set Up
+// Date: 3/2/2023
+// Based on:
+// Source URL: https://www.youtube.com/watch?v=2BoSBaWvFhM
+
 const hbs = exphbs.create({
     extname: ".hbs",
 
@@ -238,10 +243,13 @@ app.post('/add-film-ajax', function(req, res)
     })
 });
 
+// Citation for use of placeholders in template literals rather than ?
+// Date: 3/4/2023
+// Based on information from discussion on Ed:
+// Source URL: https://edstem.org/us/courses/32532/discussion/2720506
 app.put('/put-film-ajax', function(req, res, next){
     let data = req.body;
   
-    // Code Citation: https://edstem.org/us/courses/32532/discussion/2720506
     let queryUpdateFilms = `UPDATE Films SET film_price = '${data.film_price}', film_in_stock = '${data.film_in_stock}' WHERE Films.film_id = '${parseInt(data.film_id)}'`;
   
           // Run the 1st query
@@ -326,8 +334,11 @@ app.post('/add-order-ajax', function(req, res){
             res.sendStatus(400);
         }  
         
+        // Code citation for the use of insertId for finding last created primary key id
+        // Date: 3/6/2023
+        // Based on information from:
+        // Source URL: https://www.mysqltutorial.org/mysql-nodejs/insert/
         else {
-            // Code Citation: https://www.mysqltutorial.org/mysql-nodejs/insert/
             let order_id = rows.insertId;
             query2 = `INSERT INTO Orders_Films (order_id, film_id) VALUES
             (${order_id}, '${data.film_id}');`;

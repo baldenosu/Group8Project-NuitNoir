@@ -46,7 +46,6 @@ updateFilmForm.addEventListener("submit", function (e) {
 })
 
 function updateRow(data, filmID){
-    console.log("Made it here");
     let parsedData = JSON.parse(data);
     
     let table = document.getElementById("film-table");

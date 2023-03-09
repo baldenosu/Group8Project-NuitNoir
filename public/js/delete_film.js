@@ -18,7 +18,7 @@ function deleteFilm(filmID) {
 function deleteRow(filmID) {
     let table = document.getElementById("film-table");
     for (let i = 0, row; row = table.rows[i]; i++) {
-        if (table.row[i].getAttribute("data-value") == filmID) {
+        if (table.rows[i].getAttribute("data-value") == filmID) {
             table.deleteRow(i);
             break;
         }
