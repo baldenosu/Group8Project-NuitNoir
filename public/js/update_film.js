@@ -64,8 +64,8 @@ function updateRow(data, filmID){
             let filmInStockTd = updateRowIndex.getElementsByTagName("td")[3];
 
             // Reassign homeworld to our value we updated to 
-            filmPriceTd.innerHTML = parsedData[1].film_price;
-            filmInStockTd.innerHTML = parsedData[2].film_in_stock;
+            filmPriceTd.innerHTML = parsedData.film_price;
+            filmInStockTd.innerHTML = parsedData.film_in_stock;
        }
     }
     window.location.reload();

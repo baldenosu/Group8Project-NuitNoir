@@ -151,7 +151,7 @@ CREATE TABLE `Orders_Films` (
   `order_id` int(11),
   `film_id` int(11),
   FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE SET NULL,
-  FOREIGN KEY (film_id) REFERENCES Films(film_id) ON DELETE RESTRICT
+  FOREIGN KEY (film_id) REFERENCES Films(film_id) ON DELETE SET NULL
 );
 
 

@@ -252,7 +252,7 @@ app.put('/put-film-ajax', function(req, res, next){
   
     let queryUpdateFilms = `UPDATE Films SET film_price = '${data.film_price}', film_in_stock = '${data.film_in_stock}' WHERE Films.film_id = '${parseInt(data.film_id)}'`;
   
-          // Run the 1st query
+          // Run the query
           db.pool.query(queryUpdateFilms, function(error, rows, fields){
               if (error) {
               console.log(error);
