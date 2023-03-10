@@ -1,3 +1,4 @@
+// Function to delete film and film row from database and Films page table
 function deleteFilm(filmID) {
     let link = '/delete-film-ajax/';
     let data = {
@@ -15,6 +16,7 @@ function deleteFilm(filmID) {
     });
 }
 
+// Function to delete row of film from Films page table
 function deleteRow(filmID) {
     let table = document.getElementById("film-table");
     for (let i = 0, row; row = table.rows[i]; i++) {

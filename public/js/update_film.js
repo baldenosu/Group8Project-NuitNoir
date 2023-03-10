@@ -63,7 +63,7 @@ function updateRow(data, filmID){
             let filmPriceTd = updateRowIndex.getElementsByTagName("td")[2];
             let filmInStockTd = updateRowIndex.getElementsByTagName("td")[3];
 
-            // Reassign homeworld to our value we updated to 
+            // Reassign Film attributes to our values we updated to 
             filmPriceTd.innerHTML = parsedData.film_price;
             filmInStockTd.innerHTML = parsedData.film_in_stock;
        }

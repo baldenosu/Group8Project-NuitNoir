@@ -53,7 +53,7 @@ addFilmForm.addEventListener("submit", function (e) {
 
 
 // Creates a single row from an Object representing a single record from 
-// Customer Levels
+// Films
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
