@@ -8,7 +8,7 @@ var app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
-PORT = 9037;
+PORT = 9039;
 const path = require('path');
 // Database
 var db = require('./database/db-connector');
@@ -53,25 +53,31 @@ app.get('/customers', function(req, res)
         let query1;
         if (req.query.customer_name === undefined)
         {
-            query1 = `SELECT * FROM Customers;`;
+            query1 = `SELECT Customers.customer_id AS ID,
+            Customers.customer_name AS Name,
+            Customers.customer_address AS Address,
+            Customers.customer_email AS Email,
+            Customer_Levels.level_name AS 'Level Name'
+            FROM Customers
+            LEFT JOIN Customer_Levels ON Customers.customer_level_id = Customer_Levels.customer_level_id;`;
         }
         else
         {
-            query1 = `SELECT * FROM Customers WHERE customer_name LIKE  "$req.query.customer_name}%"`
+            query1 = `SELECT Customers.customer_id AS ID,
+            Customers.customer_name AS Name,
+            Customers.customer_address AS Address,
+            Customers.customer_email AS Email,
+            Customer_Levels.level_name AS 'Level Name'
+            FROM Customers
+            LEFT JOIN Customer_Levels ON Customers.customer_level_id = Customer_Levels.customer_level_id 
+            WHERE customer_name LIKE  
+            "$req.query.customer_name}%";`;
         }
         let query2 = `SELECT * FROM Customer_Levels;`;
         db.pool.query(query1, function(error, rows, fields){
             let customers = rows;
             db.pool.query(query2, (error, rows, fields) => {
                 let customer_levels = rows;
-                let customerLevelMap = {}
-                customer_levels.map(customerLevel => {
-                    let customerLevelId = parseInt(customerLevel.customer_level_id, 10);
-                    customerLevelMap[customerLevelId] = customerLevel['level_name']
-                })
-                customer = customers.map(person => {
-                    return Object.assign(person, {customer_level_id: customerLevelMap[person.customer_level_id]})
-                })
                 return res.render('customers', {data: customers, customer_level: customer_levels});
             })
         })
@@ -167,7 +173,10 @@ app.delete('/delete-customer-ajax/', function(req,res,next){
 
 app.get('/employees', function(req, res)
     {
-        let query1 = `SELECT employee_id, employee_name, employee_title FROM Employees;`;
+        let query1 = `SELECT employee_id AS ID, 
+        employee_name AS Name, 
+        employee_title AS Title
+        FROM Employees;`;
         db.pool.query(query1, function(error, rows, fields){
             res.render('employees', {data: rows});
         })
@@ -473,5 +482,3 @@ app.post('/add-customer_level-ajax', function(req, res)
 app.listen(PORT, function(){
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
-
-
