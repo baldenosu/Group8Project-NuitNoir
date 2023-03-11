@@ -1,7 +1,7 @@
 <!-- employees.hbs -->
 <h1>Employees</h1>
 <body>
-    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
 </body>
 <div id="insert" style="display: block">
     {{!-- Create a table --}}
@@ -19,9 +19,9 @@
         <tbody>
             {{#each data}}
             <tr>
-                <td>{{this.employee_id}}</td>
-                <td>{{this.employee_name}}</td>
-                <td>{{this.employee_title}}</td>
+                <td>{{this.ID}}</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Title}}</td>
             </tr>
             {{/each}}
         </tbody>

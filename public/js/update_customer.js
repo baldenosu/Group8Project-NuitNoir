@@ -54,7 +54,7 @@ function updateRow(data, customerID){
        //rows would be accessed using the "row" variable assigned in the for loop
        if (table.rows[i].getAttribute("data-value") == customerID) {
 
-            // Get the location of the row where we found the matching person ID
+            // Get the location of the row where we found the matching customer ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Get td of Customer Level value
