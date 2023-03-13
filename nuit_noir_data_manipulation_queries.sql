@@ -33,7 +33,11 @@ WHERE employee_name = :employee_name_from_the_Update_Form;
 --Films
 
 --Browsing Films table.
-SELECT * FROM Films;
+SELECT film_id AS ID, 
+film_name AS Film, 
+film_price AS Price, 
+film_in_stock AS 'In Stock' 
+FROM Films;
 
 -- Adding a film to the Films table.
 INSERT INTO Films(film_name, film_price, film_in_stock)
@@ -47,9 +51,17 @@ WHERE film_name = :film_name_from_the_Update_Form;
 --Orders
 
 --Browsing Orders table.
-SELECT Orders.order_id, Employees.employee_name, Customers.customer_name FROM Orders
-INNER JOIN Employees ON Orders.employee_id = Employees.employee_id
-INNER JOIN Customers ON Orders.customer_id = Customers.customer_id
+SELECT Orders.order_id AS ID,
+Orders.order_date AS Date,
+Orders.total_price AS 'Total Price',
+Employees.employee_name AS Employee,
+Customers.customer_name AS Customer,
+Films.film_name AS 'Film(s)'
+FROM Orders
+JOIN Employees ON Orders.employee_id = Employees.employee_id
+JOIN Customers ON Orders.customer_id = Customers.customer_id
+JOIN Orders_Films ON Orders.order_id = Orders_Films.order_id
+JOIN Films ON Orders_Films.film_id = Films.film_id           
 ORDER BY Orders.order_id ASC;
 
 --Creating an Order
@@ -60,9 +72,17 @@ VALUES (:order_date_Input, :total_price_Input, :employee_id_Input, :customer_id_
 --Orders_Films
 
 --Browsing Orders_Films table.
-SELECT * FROM Orders_Films;
+SELECT order_id AS 'Order ID', film_name AS Film 
+FROM Orders_Films
+INNER JOIN Films ON Orders_Films.film_id = Films.film_id
+ORDER BY order_id ASC;
 
 --Customer_Levels
 
 --Browsing Customer Levels table.
-SELECT * FROM Customer_Levels;
+SELECT customer_level_id AS ID, 
+level_name AS 'Level Name', 
+level_description AS Description, 
+discount_percent AS 'Discount Percent' 
+FROM Customer_Levels
+ORDER BY discount_percent ASC;
