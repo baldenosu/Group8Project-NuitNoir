@@ -1,7 +1,14 @@
 -- Customers
 
 -- Browsing Customers table.
-SELECT * FROM Customers;
+SELECT
+Customers.customer_id AS ID,
+Customers.customer_name AS Name,
+Customers.customer_address AS Address,
+Customers.customer_email AS Email,
+Customer_Levels.level_name AS 'Level Name'
+FROM Customers
+LEFT JOIN Customer_Levels ON Customers.customer_level_id = Customer_Levels.customer_level_id;
 
 -- Adding a customer to Customers table.
 INSERT INTO Customers (customer_name, customer_address, customer_email, customer_level_id) 
@@ -14,7 +21,6 @@ WHERE customer_name = :customer_name_from_the_Update_Form;
 
 -- Get all Customer Level IDs and Level Types to populate the Customer_Level dropdown from Customer_Level table.
 SELECT customer_level_id, level_name from Customer_Levels;
-
 
 -- Employees
 
@@ -67,7 +73,6 @@ ORDER BY Orders.order_id ASC;
 --Creating an Order
 INSERT INTO Orders(order_date, total_price, employee_id, customer_id)
 VALUES (:order_date_Input, :total_price_Input, :employee_id_Input, :customer_id_Input);
-
 
 --Orders_Films
 
