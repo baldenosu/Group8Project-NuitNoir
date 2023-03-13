@@ -2,7 +2,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <h1>Customers</h1>
 <body>
-    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders_Films</a> | <a href="/customer_levels">Customer Levels</a> ]
+    [ <a href="/">Home</a> | <a href="/customers">Customers</a> | <a href="/employees">Employees</a> | <a href="/orders">Orders</a> | <a href="/films">Films</a> | <a href="/orders_films">Orders Films</a> | <a href="/customer_levels">Customer Levels</a> ]
 </body>
 <div id="insert" style="display: block">
     {{!-- Create a table --}}
@@ -15,18 +15,18 @@
                     {{@key}}
                 </th>
                 {{/each}}
-                <th>delete</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             {{#each data}}
-            <tr data-value={{this.customer_id}}>
-                <td>{{this.customer_id}}</td>
-                <td>{{this.customer_name}}</td>
-                <td>{{this.customer_address}}</td>
-                <td>{{this.customer_email}}</td>
-                <td>{{this.customer_level_id}}</td>
-                <td><button onclick="deleteCustomer({{this.customer_id}})">Delete</button></td>
+            <tr data-value={{this.ID}}>
+                <td>{{this.ID}}</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Address}}</td>
+                <td>{{this.Email}}</td>
+                <td>{{this.[Level Name]}}</td>
+                <td><button onclick="deleteCustomer({{this.ID}})">Delete</button></td>
             </tr>
             {{/each}}
         </tbody>
@@ -65,7 +65,7 @@
         <select name="input-customer_name" id="mySelect">
             <option value="test">Select Customer</option>
             {{#each data}}
-            <option value="{{this.customer_id}}">{{this.customer_name}}</option>
+            <option value="{{this.ID}}">{{this.Name}}</option>
             {{/each}}
         </select>
         <label for="input-customer_level">Customer Level: </label>
